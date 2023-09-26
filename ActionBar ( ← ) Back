@@ -1,0 +1,13 @@
+ supportActionBar?.setDisplayHomeAsUpEnabled(true)
+
+ override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            android.R.id.home -> {
+                // Cuando se presiona el botón de "Atrás" en la ActionBar, iniciamos MainActivity
+                val intent = Intent(this, MainActivity::class.java)
+                startActivity(intent)
+                return true
+            }
+            else -> return super.onOptionsItemSelected(item)
+        }
+    }
