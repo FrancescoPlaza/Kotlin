@@ -1,5 +1,8 @@
- supportActionBar?.setDisplayHomeAsUpEnabled(true)
+en OnCreate
 
+supportActionBar?.setDisplayHomeAsUpEnabled(true)
+
+En class
  override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             android.R.id.home -> {
