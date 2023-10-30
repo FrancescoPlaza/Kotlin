@@ -1,0 +1,109 @@
+En strings.xml 
+
+    <string name="open_drawer">Abrir</string>
+    <string name="close_drawer">Cerrar</string>
+
+En res/menu/nav_drawer_menu.xml
+
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_item1"
+            android:title="Inicio" />
+        <item
+            android:id="@+id/nav_item2"
+            android:title="Reserva Online" />
+        <item
+            android:id="@+id/nav_item3"
+            android:title="Contacto" />
+    </group>
+
+
+</menu>
+
+En activity.xml 
+
+<androidx.drawerlayout.widget.DrawerLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/drawerLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".OpenActivity">
+
+    <!-- Contenido principal -->
+    <FrameLayout
+        android:id="@+id/container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+ </FrameLayout>
+    <com.google.android.material.navigation.NavigationView
+        android:id="@+id/navView"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        app:menu="@menu/nav_drawer_menu" />
+</androidx.drawerlayout.widget.DrawerLayout>
+
+En Activity.kt 
+
+    private lateinit var drawerLayout: DrawerLayout
+    private lateinit var navView: NavigationView
+
+override fun onCreate(savedInstanceState: Bundle?){
+
+        drawerLayout = findViewById(R.id.drawerLayout)
+        navView = findViewById(R.id.navView)
+
+        val toggle = ActionBarDrawerToggle(
+            this, drawerLayout, R.string.open_drawer, R.string.close_drawer
+        )
+
+        drawerLayout.addDrawerListener(toggle)
+        toggle.syncState()
+
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+
+        navView.setNavigationItemSelectedListener { menuItem ->
+            when (menuItem.itemId) {
+                R.id.nav_item1 -> {
+                    // Manejar la selección del elemento 1
+                }
+                R.id.nav_item2 -> {
+                    // Manejar la selección del elemento 2
+                }
+                R.id.nav_item3 -> {
+                    // Manejar la selección del elemento 3
+                }
+            }
+            closeDrawer() // Cierra el Navigation Drawer después de la selección
+            true
+        }
+
+}
+
+override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        if (item.itemId == android.R.id.home) {
+            if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
+                closeDrawer() // Cerrar el Navigation Drawer si está abierto
+            } else {
+                openDrawer() // Abrir el Navigation Drawer si está cerrado
+            }
+        }
+        return super.onOptionsItemSelected(item)
+    }
+
+    // Función para abrir el Navigation Drawer
+    private fun openDrawer() {
+        drawerLayout.openDrawer(GravityCompat.START)
+    }
+
+    // Función para cerrar el Navigation Drawer
+    private fun closeDrawer() {
+        drawerLayout.closeDrawer(GravityCompat.START)
+    }
+
