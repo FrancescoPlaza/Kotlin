@@ -34,12 +34,11 @@ En activity.xml
     android:layout_height="match_parent"
     tools:context=".OpenActivity">
 
-    <!-- Contenido principal -->
     <FrameLayout
         android:id="@+id/container"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-
+    <!-- Contenido principal -->
  </FrameLayout>
     <com.google.android.material.navigation.NavigationView
         android:id="@+id/navView"
